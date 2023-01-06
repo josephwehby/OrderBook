@@ -1,16 +1,20 @@
 #ifndef ORDER_HPP
 #define ORDER_HPP
 
+#include <memory>
+
+#include "User.hpp"
+
 enum OrderType {Buy, Sell};
 
 class Order {
     public:
         Order();
     private:
+        std::shared_ptr<User> trader;
         OrderType  order_type;
         unsigned int quantity;
         double price; 
-        long user_id; // pointer to user instead most likely
         double time;
 };
 

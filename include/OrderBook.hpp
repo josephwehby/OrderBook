@@ -10,6 +10,7 @@ class OrderBook {
         OrderBook();
         int bestBid();
         int bestAsk();
+        void printOrderBook();
     private:
         double best_bid;
         double best_ask;
