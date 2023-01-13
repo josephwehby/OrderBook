@@ -11,6 +11,7 @@ class Order {
     public:
         Order();
     private:
+        friend class Level;
         std::shared_ptr<User> trader;
         OrderType  order_type;
         unsigned int quantity;

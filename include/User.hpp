@@ -8,7 +8,6 @@ class User {
         User();
     private:
         std::string name;
-        
+        unsigned long id;
 };
-
 #endif
