@@ -1,3 +1,3 @@
-/mnt/c/users/josep/documents/programming/C++/trading_simulator/CMakeFiles/main.dir
-/mnt/c/users/josep/documents/programming/C++/trading_simulator/CMakeFiles/edit_cache.dir
-/mnt/c/users/josep/documents/programming/C++/trading_simulator/CMakeFiles/rebuild_cache.dir
+/home/wehby/Programming/C++/trading_simulator/CMakeFiles/main.dir
+/home/wehby/Programming/C++/trading_simulator/CMakeFiles/edit_cache.dir
+/home/wehby/Programming/C++/trading_simulator/CMakeFiles/rebuild_cache.dir

@@ -24,7 +24,7 @@ bool OrderBook::addOrder(OrderType order_type, double price, unsigned int quanti
     if (!bid && !ask) return false;
 
     
-
+    return true;
 
 }
 

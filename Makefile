@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/c/users/josep/documents/programming/C++/trading_simulator
+CMAKE_SOURCE_DIR = /home/wehby/Programming/C++/trading_simulator
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/c/users/josep/documents/programming/C++/trading_simulator
+CMAKE_BINARY_DIR = /home/wehby/Programming/C++/trading_simulator
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/users/josep/documents/programming/C++/trading_simulator/CMakeFiles /mnt/c/users/josep/documents/programming/C++/trading_simulator//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wehby/Programming/C++/trading_simulator/CMakeFiles /home/wehby/Programming/C++/trading_simulator//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/users/josep/documents/programming/C++/trading_simulator/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wehby/Programming/C++/trading_simulator/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -129,6 +129,54 @@ main/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
 .PHONY : main/fast
 
+src/Level.o: src/Level.cpp.o
+.PHONY : src/Level.o
+
+# target to build an object file
+src/Level.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/Level.cpp.o
+.PHONY : src/Level.cpp.o
+
+src/Level.i: src/Level.cpp.i
+.PHONY : src/Level.i
+
+# target to preprocess a source file
+src/Level.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/Level.cpp.i
+.PHONY : src/Level.cpp.i
+
+src/Level.s: src/Level.cpp.s
+.PHONY : src/Level.s
+
+# target to generate assembly for a file
+src/Level.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/Level.cpp.s
+.PHONY : src/Level.cpp.s
+
+src/OrderBook.o: src/OrderBook.cpp.o
+.PHONY : src/OrderBook.o
+
+# target to build an object file
+src/OrderBook.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/OrderBook.cpp.o
+.PHONY : src/OrderBook.cpp.o
+
+src/OrderBook.i: src/OrderBook.cpp.i
+.PHONY : src/OrderBook.i
+
+# target to preprocess a source file
+src/OrderBook.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/OrderBook.cpp.i
+.PHONY : src/OrderBook.cpp.i
+
+src/OrderBook.s: src/OrderBook.cpp.s
+.PHONY : src/OrderBook.s
+
+# target to generate assembly for a file
+src/OrderBook.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/OrderBook.cpp.s
+.PHONY : src/OrderBook.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -162,6 +210,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... main"
+	@echo "... src/Level.o"
+	@echo "... src/Level.i"
+	@echo "... src/Level.s"
+	@echo "... src/OrderBook.o"
+	@echo "... src/OrderBook.i"
+	@echo "... src/OrderBook.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
