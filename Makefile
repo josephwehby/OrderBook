@@ -153,6 +153,30 @@ src/Level.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/Level.cpp.s
 .PHONY : src/Level.cpp.s
 
+src/Order.o: src/Order.cpp.o
+.PHONY : src/Order.o
+
+# target to build an object file
+src/Order.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/Order.cpp.o
+.PHONY : src/Order.cpp.o
+
+src/Order.i: src/Order.cpp.i
+.PHONY : src/Order.i
+
+# target to preprocess a source file
+src/Order.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/Order.cpp.i
+.PHONY : src/Order.cpp.i
+
+src/Order.s: src/Order.cpp.s
+.PHONY : src/Order.s
+
+# target to generate assembly for a file
+src/Order.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/Order.cpp.s
+.PHONY : src/Order.cpp.s
+
 src/OrderBook.o: src/OrderBook.cpp.o
 .PHONY : src/OrderBook.o
 
@@ -176,6 +200,30 @@ src/OrderBook.s: src/OrderBook.cpp.s
 src/OrderBook.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/OrderBook.cpp.s
 .PHONY : src/OrderBook.cpp.s
+
+src/User.o: src/User.cpp.o
+.PHONY : src/User.o
+
+# target to build an object file
+src/User.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/User.cpp.o
+.PHONY : src/User.cpp.o
+
+src/User.i: src/User.cpp.i
+.PHONY : src/User.i
+
+# target to preprocess a source file
+src/User.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/User.cpp.i
+.PHONY : src/User.cpp.i
+
+src/User.s: src/User.cpp.s
+.PHONY : src/User.s
+
+# target to generate assembly for a file
+src/User.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/User.cpp.s
+.PHONY : src/User.cpp.s
 
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
@@ -213,9 +261,15 @@ help:
 	@echo "... src/Level.o"
 	@echo "... src/Level.i"
 	@echo "... src/Level.s"
+	@echo "... src/Order.o"
+	@echo "... src/Order.i"
+	@echo "... src/Order.s"
 	@echo "... src/OrderBook.o"
 	@echo "... src/OrderBook.i"
 	@echo "... src/OrderBook.s"
+	@echo "... src/User.o"
+	@echo "... src/User.i"
+	@echo "... src/User.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

@@ -9,11 +9,12 @@ enum OrderType {Buy, Sell};
 
 class Order {
     public:
-        Order();
+        Order(std::shared_ptr<User>, OrderType, unsigned int, double, double);
     private:
         friend class Level;
+        friend class OrderBook;
         std::shared_ptr<User> trader;
-        OrderType  order_type;
+        OrderType order_type;
         unsigned int quantity;
         double price; 
         double time;

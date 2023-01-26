@@ -1,7 +1,8 @@
 #include "Level.hpp"
 
-Level::Level() {
-
+Level::Level(std::shared_ptr<Order> order) {
+    price = order->price;
+    level_orders[order->time] = order;
 }
 
 unsigned int Level::getLevelQuantity() {

@@ -5,9 +5,10 @@
 
 class User {
     public:
-        User();
+        User(std::string, unsigned long);
     private:
         std::string name;
         unsigned long id;
 };
+
 #endif

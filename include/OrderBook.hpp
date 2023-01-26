@@ -5,11 +5,12 @@
 #include "Order.hpp"
 #include "Level.hpp"
 #include <vector>
+#include <iostream>
 
 class OrderBook {
     public:
         OrderBook();
-        bool addOrder(OrderType order_type, double price, unsigned int quantity);
+        bool addOrder(std::shared_ptr<Order>);
         double bestBid();
         double bestAsk();
         double getSpread();
@@ -20,8 +21,8 @@ class OrderBook {
         std::map<double, std::shared_ptr<Level>> bid_levels;
         std::map<double, std::shared_ptr<Level>> ask_levels;
 
-        bool addBid();
-        bool addAsk();
+        bool addBid(std::shared_ptr<Order>);
+        bool addAsk(std::shared_ptr<Order>);
 };
 
 #endif

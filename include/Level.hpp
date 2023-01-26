@@ -6,12 +6,13 @@
 
 class Level {
     public:
-        Level();
+        Level(std::shared_ptr<Order>);
         unsigned int getLevelQuantity();
         unsigned int getOrderQuantity();
     private:
+        friend class OrderBook;
         double price;
-        std::map <double, std::shared_ptr<Order>> level_orders;
+        std::map<double, std::shared_ptr<Order>> level_orders;
 };
 
 #endif
