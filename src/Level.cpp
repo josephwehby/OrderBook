@@ -21,3 +21,9 @@ unsigned int Level::getLevelQuantity() {
 unsigned int Level::getOrderQuantity() {
     return level_orders.size();
 }
+
+void Level::printLevel() {
+
+    std::cout << getLevelQuantity() << " $" << price << std::endl;
+
+}

@@ -18,6 +18,7 @@ class OrderBook {
       
     private:
         double spread;
+        // price, price_level 
         std::map<double, std::shared_ptr<Level>> bid_levels;
         std::map<double, std::shared_ptr<Level>> ask_levels;
 

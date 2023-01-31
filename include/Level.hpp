@@ -1,6 +1,7 @@
 #ifndef LEVEL_HPP
 #define LEVEL_HPP
 
+#include <iostream>
 #include <map>
 #include "Order.hpp"
 
@@ -9,6 +10,7 @@ class Level {
         Level(std::shared_ptr<Order>);
         unsigned int getLevelQuantity();
         unsigned int getOrderQuantity();
+        void printLevel();
     private:
         friend class OrderBook;
         double price;
