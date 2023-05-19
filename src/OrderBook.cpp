@@ -6,25 +6,21 @@ OrderBook::OrderBook() {
 
 bool OrderBook::addOrder(std::shared_ptr<Order> order) {
     
-    bool bid, ask;
-    bid = false;
-    ask = false;
+    bool add_order = true;
 
     switch(order->order_type) {
         case Buy:
-            bid = true;
+            addBid(order);
             break;
         case Sell:
-            ask = true;
+			addAsk(order);
             break;
         default:
-            break;
+			add_order = false;
+			break;
     }
 
-    if (bid) addBid(order);
-    if (ask) addAsk(order);
-
-    return true;
+    return add_order;
 }
 
 double OrderBook::bestBid() {
