@@ -1,3 +1,0 @@
-/home/wehby/Programming/C++/trading_simulator/CMakeFiles/main.dir
-/home/wehby/Programming/C++/trading_simulator/CMakeFiles/edit_cache.dir
-/home/wehby/Programming/C++/trading_simulator/CMakeFiles/rebuild_cache.dir
