@@ -1,0 +1,1 @@
+/usr/bin/c++  -Wall -Werror -Wno-format-security -Wno-self-assign-overloaded CMakeFiles/main.dir/src/Level.cpp.o CMakeFiles/main.dir/src/Order.cpp.o CMakeFiles/main.dir/src/OrderBook.cpp.o CMakeFiles/main.dir/src/User.cpp.o CMakeFiles/main.dir/src/main.cpp.o -o bin/main 
