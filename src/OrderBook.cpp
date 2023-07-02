@@ -58,19 +58,44 @@ void OrderBook::printOrderBook() {
 bool OrderBook::addBid(std::shared_ptr<Order> order) {
     
     auto bid_it = bid_levels.find(order->price);
-
-    // if price level does not exist then create a new level with the current bid submitted
-    if (bid_it == bid_levels.end()) {
-        std::cout << "new level" << std::endl;
-        auto l = std::make_shared<Level>(order);
-        bid_levels[order->price] = l;
-        return true;
+	double best_ask;
+	int available_shares, share_count;
     
+	// if price level does not exist then create a new level with the current bid submitted
+    if (bid_it == bid_levels.end()) {
+		best_ask = bestAsk();
+        
+		if (order->price >= best_ask && best_ask != 0) {
+			auto ask_level = ask_levels.begin()->second;
+			available_shares = ask_level->getLevelQuantity() - order->quantity;
+			
+			if (available_shares == 0) {
+				ask_levels.erase(best_ask);
+			
+			// loop through each order on the level and subtract shares until none remain
+			} else if (available_shares > 0) {
+				auto ask_orders = ask_level->level_orders;
+				share_count = order->quantity;
+				
+				for (auto it = ask_orders.begin(); it != ask_orders.end(); it++) {
+					if (share_count == (int) it->second->quantity) {
+						ask_orders.erase(it);
+						break;		
+					}
+				}
+			} else {
+				return false;
+			}
+
+		} else {
+			auto new_level = std::make_shared<Level>(order);
+			bid_levels[order->price] = new_level;
+			return true;
+		} 
     // if level already exists then add order into the level_orders map
     } else {
         auto l = bid_it->second;
         l->level_orders[order->time] = order;
-        std::cout << "existing level" << std::endl;
         return true;
     }
 
@@ -83,7 +108,6 @@ bool OrderBook::addAsk(std::shared_ptr<Order> order) {
 
     // if price level does not exist then create a new level with the current bid submitted
     if (ask_it == ask_levels.end()) {
-        std::cout << "new level" << std::endl;
         auto l = std::make_shared<Level>(order);
         ask_levels[order->price] = l;
         return true;
@@ -92,7 +116,6 @@ bool OrderBook::addAsk(std::shared_ptr<Order> order) {
     } else {
         auto l = ask_it->second;
         l->level_orders[order->time] = order;
-        std::cout << "existing level" << std::endl;
         return true;
     }
 

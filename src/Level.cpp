@@ -12,7 +12,7 @@ unsigned int Level::getLevelQuantity() {
 
     for (auto it = level_orders.begin(); it != level_orders.end(); it++) {
         auto current_order = it->second;
-        count += current_order->quantity;
+		count += current_order->quantity;
     }
 
     return count;
