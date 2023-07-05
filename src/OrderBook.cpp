@@ -42,14 +42,12 @@ double OrderBook::bestAsk() {
 void OrderBook::printOrderBook() {
     
     std::cout << "BID" << std::endl;
-    for (auto bit = bid_levels.rbegin(); bit != bid_levels.rend(); bit++) {
-        
+    for (auto bit = bid_levels.rbegin(); bit != bid_levels.rend(); bit++) {  
         bit->second->printLevel();
     }
     
     std::cout << "ASK" << std::endl;
-    for (auto ait = ask_levels.begin(); ait != ask_levels.end(); ait++) {
-        
+    for (auto ait = ask_levels.begin(); ait != ask_levels.end(); ait++) {  
         ait->second->printLevel();
     }
     
@@ -74,12 +72,12 @@ bool OrderBook::addBid(std::shared_ptr<Order> order) {
 			
 			// loop through each order on the level and subtract shares until none remain
 			} else if (available_shares > 0) {
-				auto ask_orders = ask_level->level_orders;
+				ask_level->level_orders;
 				share_count = order->quantity;
 				
-				for (auto it = ask_orders.begin(); it != ask_orders.end(); it++) {
+				for (auto it = ask_level->level_orders.begin(); it != ask_level->level_orders.end(); it++) {
 					if (share_count == (int) it->second->quantity) {
-						ask_orders.erase(it);
+						ask_level->level_orders.erase(it);
 						break;		
 					}
 				}
