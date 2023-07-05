@@ -55,9 +55,11 @@ void OrderBook::printOrderBook() {
 
 bool OrderBook::addBid(std::shared_ptr<Order> order) {
     
-    auto bid_it = bid_levels.find(order->price);
-	double best_ask;
+    unsigned int i;
+    double best_ask;
 	int available_shares, share_count;
+    auto bid_it = bid_levels.find(order->price);
+	
     
 	// if price level does not exist then create a new level with the current bid submitted
     if (bid_it == bid_levels.end()) {
@@ -75,10 +77,10 @@ bool OrderBook::addBid(std::shared_ptr<Order> order) {
 				ask_level->level_orders;
 				share_count = order->quantity;
 				
-				for (auto it = ask_level->level_orders.begin(); it != ask_level->level_orders.end(); it++) {
-					if (share_count == (int) it->second->quantity) {
-						ask_level->level_orders.erase(it);
-						break;		
+				for (i = 0; i < ask_level->level_orders.size(); i++) {
+					if (share_count == (int) ask_level->level_orders[i]->quantity) {
+						ask_level->level_orders.pop_front();
+						break;
 					}
 				}
 			} else {
@@ -93,7 +95,7 @@ bool OrderBook::addBid(std::shared_ptr<Order> order) {
     // if level already exists then add order into the level_orders map
     } else {
         auto l = bid_it->second;
-        l->level_orders[order->time] = order;
+        l->level_orders.push_back(order);
         return true;
     }
 
@@ -113,7 +115,7 @@ bool OrderBook::addAsk(std::shared_ptr<Order> order) {
     // if level already exists then add order into the level_orders map
     } else {
         auto l = ask_it->second;
-        l->level_orders[order->time] = order;
+        l->level_orders.push_back(order);
         return true;
     }
 

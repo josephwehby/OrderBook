@@ -2,17 +2,17 @@
 
 Level::Level(std::shared_ptr<Order> order) {
     price = order->price;
-    level_orders[order->time] = order;
+    level_orders.push_back(order);
 }
 
 unsigned int Level::getLevelQuantity() {
-    unsigned int count;
+    unsigned int count, i;
 
     count = 0;
 
-    for (auto it = level_orders.begin(); it != level_orders.end(); it++) {
-        auto current_order = it->second;
-		count += current_order->quantity;
+    for (i = 0; i < level_orders.size(); i++) {
+		std::shared_ptr<Order> current_order = level_orders[i];
+        count += current_order->quantity;
     }
 
     return count;
@@ -23,7 +23,7 @@ unsigned int Level::getOrderQuantity() {
 }
 
 void Level::printLevel() {
-
+    std::cout << std::setprecision(2) << std::fixed;
     std::cout << getLevelQuantity() << " $" << price << std::endl;
 
 }

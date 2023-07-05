@@ -6,6 +6,7 @@
 #include "Level.hpp"
 #include <vector>
 #include <iostream>
+#include <deque>
 
 class OrderBook {
     public:

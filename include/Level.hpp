@@ -2,7 +2,8 @@
 #define LEVEL_HPP
 
 #include <iostream>
-#include <map>
+#include <iomanip>
+#include <deque>
 #include "Order.hpp"
 
 class Level {
@@ -14,7 +15,7 @@ class Level {
     private:
         friend class OrderBook;
         double price;
-        std::map<double, std::shared_ptr<Order>> level_orders;
+        std::deque <std::shared_ptr<Order>> level_orders;
 };
 
 #endif
