@@ -12,8 +12,8 @@ int main() {
     std::shared_ptr<Order> ask2;
     
     bid = std::make_shared<Order>(Buy, 100, 3.99);
-    bid2 = std::make_shared<Order>(Buy, 100, 4.02);
-    ask = std::make_shared<Order>(Sell, 100, 4.02);
+    bid2 = std::make_shared<Order>(Buy, 100, 4.30);
+    ask = std::make_shared<Order>(Sell, 100, 4.30);
     ask2 = std::make_shared<Order>(Sell, 5000, 4.30);
     
 	std::cout << "Limit Order Book" << std::endl;
@@ -25,7 +25,12 @@ int main() {
 	orderbook.printOrderBook();
     std::cout << "==================" << std::endl;
 	orderbook.addOrder(bid2);
-    
+
+    orderbook.printOrderBook();
+    bid2 = std::make_shared<Order>(Buy, 1000, 4.32);
+    std::cout << "==================" << std::endl;
+	orderbook.addOrder(bid2);
+    orderbook.addOrder(bid2);
 	orderbook.printOrderBook();
 	
     return 0;

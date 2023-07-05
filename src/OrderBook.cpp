@@ -7,7 +7,7 @@ OrderBook::OrderBook() {
 bool OrderBook::addOrder(std::shared_ptr<Order> order) {
     
     bool add_order = true;
-
+    std::cout << "ORDER SUMBITTED" << std::endl;
     switch(order->order_type) {
         case Buy:
             addBid(order);
@@ -57,7 +57,7 @@ bool OrderBook::addBid(std::shared_ptr<Order> order) {
     
     unsigned int i;
     double best_ask;
-	int available_shares, share_count;
+	int available_shares, share_count, current_order_quantity, temp;
     auto bid_it = bid_levels.find(order->price);
 	
     
@@ -77,11 +77,25 @@ bool OrderBook::addBid(std::shared_ptr<Order> order) {
 				ask_level->level_orders;
 				share_count = order->quantity;
 				
+                // delete orders and fix quantity 
 				for (i = 0; i < ask_level->level_orders.size(); i++) {
-					if (share_count == (int) ask_level->level_orders[i]->quantity) {
+                    
+                    current_order_quantity = (int) ask_level->level_orders[i]->quantity;
+                    
+                    if (share_count == current_order_quantity) {    
+                        share_count -= current_order_quantity;
 						ask_level->level_orders.pop_front();
-						break;
-					}
+
+					} else if (share_count < current_order_quantity){
+                        temp = current_order_quantity - share_count;
+                        share_count = 0;
+                        ask_level->level_orders[i]->quantity = temp; 
+                    
+                    }
+                    
+                    if (share_count == 0) {
+                        return true;
+                    }
 				}
 			} else {
 				return false;
