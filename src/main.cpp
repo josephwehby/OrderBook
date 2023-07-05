@@ -20,18 +20,17 @@ int main() {
         std::cin.clear();
         std::cin.ignore(10000, '\n');
         
-        std::cout << "Price: ";
-        std::cin >> price;
-        
-        std::cin.clear();
-        std::cin.ignore(10000, '\n');
-        
         std::cout << "Quantity: ";
         std::cin >> quantity;
 
         std::cin.clear();
         std::cin.ignore(10000, '\n');
-
+        
+        std::cout << "Share Price: ";
+        std::cin >> price;
+        
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
         if (buy_sell == "buy") {
             order = std::make_shared<Order>(Buy, quantity, price);
         } else {
@@ -39,6 +38,7 @@ int main() {
         }
 
         orderbook.addOrder(order);
+        std::cout << "==================" << std::endl;
         orderbook.printOrderBook();
         std::cout << "==================" << std::endl;
 

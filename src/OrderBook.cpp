@@ -39,18 +39,38 @@ double OrderBook::bestAsk() {
     return ask_levels.begin()->first;
 }
 
+double OrderBook::getSpread() {
+    double spread = bestAsk() - bestBid();
+    return spread;
+}
+
 void OrderBook::printOrderBook() {
+    bool bid, ask;
+    bid = true;
+    ask = true;
+    auto bit = bid_levels.rbegin();
+    auto ait = ask_levels.begin();
     
-    std::cout << "BID" << std::endl;
-    for (auto bit = bid_levels.rbegin(); bit != bid_levels.rend(); bit++) {  
-        bit->second->printLevel();
+    std::cout << "BID\tASK" << std::endl;
+    std::cout << "Bid/Ask Spread: " << getSpread() << std::endl;
+    while (bid || ask) {
+        
+        if (bit != bid_levels.rend()) {
+            bit->second->printLevel();
+            bit++;
+        } else {
+            bid = false;
+        }
+        std::cout << "\t";
+        if (ait != ask_levels.end()) {
+            ait->second->printLevel();
+            ait++;
+        } else {
+            ask = false;
+        }
+
+        std::cout << "\n";
     }
-    
-    std::cout << "ASK" << std::endl;
-    for (auto ait = ask_levels.begin(); ait != ask_levels.end(); ait++) {  
-        ait->second->printLevel();
-    }
-    
 }
 
 bool OrderBook::addBid(std::shared_ptr<Order> order) {
