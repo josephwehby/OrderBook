@@ -12,21 +12,22 @@ int main() {
     double price;
     unsigned int quantity;
     
-    std::cout << "Limit Order Book" << std::endl;
+    printf("Limit Order Book\n");
+
     while (true) {
-        std::cout << "Buy/Sell: ";
+        printf("Buy/Sell: ");
         std::cin >> buy_sell; 
         
         std::cin.clear();
         std::cin.ignore(10000, '\n');
         
-        std::cout << "Quantity: ";
+        printf("Quantity: ");
         std::cin >> quantity;
 
         std::cin.clear();
         std::cin.ignore(10000, '\n');
         
-        std::cout << "Share Price: ";
+        printf("Share Price: ");
         std::cin >> price;
         
         std::cin.clear();
@@ -38,9 +39,9 @@ int main() {
         }
 
         orderbook.addOrder(order);
-        std::cout << "==================" << std::endl;
+        printf("==================\n");
         orderbook.printOrderBook();
-        std::cout << "==================" << std::endl;
+        printf("==================\n");
 
 
     }

@@ -51,8 +51,9 @@ void OrderBook::printOrderBook() {
     auto bit = bid_levels.rbegin();
     auto ait = ask_levels.begin();
     
-    std::cout << "BID\tASK" << std::endl;
-    std::cout << "Bid/Ask Spread: " << getSpread() << std::endl;
+    
+    printf("Spread: %.2f\n", getSpread());
+    printf("BID\t\tASK\n");
     while (bid || ask) {
         
         if (bit != bid_levels.rend()) {
