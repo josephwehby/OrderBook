@@ -52,7 +52,7 @@ void OrderBook::printOrderBook() {
     auto ait = ask_levels.begin();
     
     
-    printf("Spread: %.2f\n", getSpread());
+    printf("  Spread: %.2f\n", getSpread());
     printf("%5s %23s\n", "BID", "ASK");
     while (bid || ask) {
         
@@ -60,6 +60,7 @@ void OrderBook::printOrderBook() {
             bit->second->printLevel();
             bit++;
         } else {
+            printf("%19s", "");
             bid = false;
         }
         printf("\t");
