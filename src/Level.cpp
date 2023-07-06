@@ -23,7 +23,5 @@ unsigned int Level::getOrderQuantity() {
 }
 
 void Level::printLevel() {
-    std::cout << std::setprecision(2) << std::fixed;
-    std::cout << getLevelQuantity() << " @ $" << price;
-
+    printf("%5d @ $%7.2f", getLevelQuantity(), price);
 }

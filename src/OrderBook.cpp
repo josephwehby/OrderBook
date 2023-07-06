@@ -53,7 +53,7 @@ void OrderBook::printOrderBook() {
     
     
     printf("Spread: %.2f\n", getSpread());
-    printf("BID\t\tASK\n");
+    printf("%5s %23s\n", "BID", "ASK");
     while (bid || ask) {
         
         if (bit != bid_levels.rend()) {
@@ -62,7 +62,7 @@ void OrderBook::printOrderBook() {
         } else {
             bid = false;
         }
-        std::cout << "\t";
+        printf("\t");
         if (ait != ask_levels.end()) {
             ait->second->printLevel();
             ait++;
@@ -70,7 +70,7 @@ void OrderBook::printOrderBook() {
             ask = false;
         }
 
-        std::cout << "\n";
+        printf("\n");
     }
 }
 
