@@ -12,8 +12,6 @@ int main() {
     double price;
     unsigned int quantity;
     
-    printf("Limit Order Book\n");
-
     while (true) {
         printf("Buy/Sell: ");
         std::cin >> buy_sell; 
@@ -39,9 +37,9 @@ int main() {
         }
 
         orderbook.addOrder(order);
-        printf("==================\n");
+        printf("=======================\n");
         orderbook.printOrderBook();
-        printf("==================\n");
+        printf("=======================\n");
 
 
     }

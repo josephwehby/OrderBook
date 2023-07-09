@@ -18,12 +18,13 @@ class OrderBook {
         void printOrderBook();
       
     private:
-        // price, price_level 
+        //        price, price_level 
         std::map<double, std::shared_ptr<Level>> bid_levels;
         std::map<double, std::shared_ptr<Level>> ask_levels;
 
-        bool addBid(std::shared_ptr<Order>);
-        bool addAsk(std::shared_ptr<Order>);
+        double addBid(std::shared_ptr<Order>);
+        double addAsk(std::shared_ptr<Order>);
+        double createNewLevel(std::shared_ptr<Order>);
 };
 
 #endif
