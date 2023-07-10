@@ -25,7 +25,8 @@ class OrderBook {
         double addBid(std::shared_ptr<Order>);
         double addAsk(std::shared_ptr<Order>);
         double createNewLevel(std::shared_ptr<Order>);
-        void removeLevels();
+        
+        void removeLevels(OrderType);
 };
 
 #endif

@@ -5,22 +5,23 @@ OrderBook::OrderBook() {
 }
 
 bool OrderBook::addOrder(std::shared_ptr<Order> order) {
-    
     bool add_order = true;
+
     std::cout << "ORDER SUMBITTED" << std::endl;
     switch(order->order_type) {
         case Buy:
             addBid(order);
-            removeLevels();
+            removeLevels(Buy);
             break;
         case Sell:
 			addAsk(order);
+            removeLevels(Sell);
             break;
         default:
 			add_order = false;
 			break;
     }
-
+    
     return add_order;
 }
 
@@ -158,7 +159,7 @@ double OrderBook::addAsk(std::shared_ptr<Order> order) {
 
     auto ask_it = ask_levels.find(order->price);
 
-    if (ask_it == ask_levels.end() && order->price >= bestBid()) {
+    if (ask_it == ask_levels.end() && bid_levels.size() != 0) {
         
         if (bestBid() == -1) {
             return createNewLevel(order);
@@ -208,12 +209,24 @@ double OrderBook::addAsk(std::shared_ptr<Order> order) {
     return -1;
 }
 
-void OrderBook::removeLevels() {
-    std::map<double, std::shared_ptr<Level>> ask_copy = ask_levels;
-
-    for (auto it = ask_copy.begin(); it != ask_copy.end(); it++) {
-        if (it->second->getLevelQuantity() == 0) {
-            ask_levels.erase(it->first);
-        }
+void OrderBook::removeLevels(OrderType order_type) {
+    
+    std::map<double, std::shared_ptr<Level>> copy;
+    
+    switch (order_type) {
+        case Buy:
+            copy = ask_levels;
+            for (auto it = copy.begin(); it != copy.end(); it++) {
+                if (it->second->getLevelQuantity() == 0) ask_levels.erase(it->first);
+            }
+            break;
+        case Sell:
+            copy = bid_levels;
+            for (auto it = copy.begin(); it != copy.end(); it++) {
+                if (it->second->getLevelQuantity() == 0) bid_levels.erase(it->first);
+            }
+            break;
+        default:
+            break;
     }
 }
