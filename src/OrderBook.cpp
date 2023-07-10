@@ -151,15 +151,55 @@ double OrderBook::addBid(std::shared_ptr<Order> order) {
 }
 
 double OrderBook::addAsk(std::shared_ptr<Order> order) {
-   
+    std::shared_ptr<Level> level;
+    std::shared_ptr<Order> current_order;
+    std::deque <std::shared_ptr<Order>> level_copy;
+    unsigned int level_shares, order_shares, i;
+
     auto ask_it = ask_levels.find(order->price);
 
-    // if price level does not exist then create a new level with the current bid submitted
-    if (ask_it == ask_levels.end()) {
-       return createNewLevel(order);
-    
-    // if level already exists then add order into the level_orders map
+    if (ask_it == ask_levels.end() && order->price >= bestBid()) {
+        
+        if (bestBid() == -1) {
+            return createNewLevel(order);
+        }
+
+        for (auto bid_it = bid_levels.rbegin(); bid_it != bid_levels.rend(); bid_it++) {
+            level_shares = bid_it->second->getLevelQuantity();
+            if (bid_it->first < order->price){
+                break;
+            }
+            else if (level_shares == order->quantity) {
+                bid_levels.erase(bid_it->first);
+                return ask_it->first;
+            } else {
+                
+                level = bid_it->second;
+                level_copy = bid_it->second->level_orders;
+
+                for (i = 0; i < level_copy.size(); i++) {
+                    current_order = level_copy[i];
+                    order_shares = current_order->quantity;
+                    
+                    if (order_shares >= order->quantity) {
+                        current_order->quantity = order_shares - order->quantity;
+                        return current_order->price;
+                    } else {
+                        order->quantity -= order_shares;
+                        level->level_orders.pop_front();
+                    }
+                } 
+            }
+        }
+
+        if (order->quantity > 0) {
+            return createNewLevel(order);
+        }
+
     } else {
+        
+        if (ask_it == ask_levels.end()) return createNewLevel(order);
+        
         auto l = ask_it->second;
         l->level_orders.push_back(order);
         return order->price;
