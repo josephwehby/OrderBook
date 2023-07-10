@@ -37,11 +37,7 @@ int main() {
         }
 
         orderbook.addOrder(order);
-        printf("=======================\n");
         orderbook.printOrderBook();
-        printf("=======================\n");
-
-
     }
 
     return 0;
