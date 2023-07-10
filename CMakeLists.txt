@@ -14,7 +14,6 @@ include_directories(
    "./include" 
 )
 
-
 if (UNIX)
   string(APPEND CMAKE_CXX_FLAGS " -Wall -Werror -Wno-format-security -Wno-self-assign-overloaded")
 endif()
