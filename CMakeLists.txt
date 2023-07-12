@@ -11,7 +11,8 @@ file(GLOB_RECURSE SRC_FILES src/*.cpp)
 
 #add header files
 include_directories(
-   "./include" 
+   "./include"
+	${SFML_INCLUDE_DIRS} 
 )
 
 if (UNIX)
@@ -19,4 +20,5 @@ if (UNIX)
 endif()
 
 add_executable(main 
-	${SRC_FILES})
+	${SRC_FILES}
+)
