@@ -6,6 +6,12 @@ project(main)
 
 set(EXECUTABLE_OUTPUT_PATH "bin")
 
+find_package(wxWidgets REQUIRED COMPONENTS net core base)
+
+if(wxWidgets_USE_FILE)
+    include(${wxWidgets_USE_FILE})
+endif()
+
 # add src files
 file(GLOB_RECURSE SRC_FILES src/*.cpp)
 
@@ -22,3 +28,4 @@ endif()
 add_executable(main 
 	${SRC_FILES}
 )
+target_link_libraries(main ${wxWidgets_LIBRARIES})
