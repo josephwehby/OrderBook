@@ -10,16 +10,12 @@
 using namespace std;
 
 int main(int argc, char *argv[]) {
-    /*
     OrderBook orderbook;
     std::shared_ptr<Order> order;
     std::string buy_sell;
     double price;
     unsigned int quantity;
-*/
-    std::cout << "yes" << std::endl;
     
-    /*
     while (true) {
         printf("Buy/Sell: ");
         std::cin >> buy_sell; 
@@ -47,6 +43,6 @@ int main(int argc, char *argv[]) {
         orderbook.addOrder(order);
         orderbook.printOrderBook();
     }
-    */
+
     return 0;
 }
