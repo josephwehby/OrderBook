@@ -18,7 +18,6 @@ file(GLOB_RECURSE SRC_FILES src/*.cpp)
 #add header files
 include_directories(
    "./include"
-	${SFML_INCLUDE_DIRS} 
 )
 
 if (UNIX)
