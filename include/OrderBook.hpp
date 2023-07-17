@@ -7,6 +7,8 @@
 #include <vector>
 #include <iostream>
 #include <deque>
+#include <string>
+#include "wx/wx.h"
 
 class OrderBook {
     public:
@@ -16,6 +18,7 @@ class OrderBook {
         double bestAsk();
         double getSpread();
         void printOrderBook();
+        void wxOrderDisplay(OrderType, wxListBox*); 
       
     private:
         //       price,  price_level 
@@ -25,7 +28,6 @@ class OrderBook {
         double addBid(std::shared_ptr<Order>);
         double addAsk(std::shared_ptr<Order>);
         double createNewLevel(std::shared_ptr<Order>);
-        
         void removeLevels(OrderType);
 };
 

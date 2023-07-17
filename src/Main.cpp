@@ -1,8 +1,8 @@
 #include "Main.hpp"
 
 wxBEGIN_EVENT_TABLE(Main, wxFrame)
-    EVT_BUTTON(10002, Main::onButtonClick)
-    EVT_BUTTON(10003, Main::onButtonClick)
+    EVT_BUTTON(10002, Main::onBuyClick)
+    EVT_BUTTON(10003, Main::onAskClick)
 wxEND_EVENT_TABLE()
 
 Main::Main() : wxFrame(nullptr, wxID_ANY, "Limit Order Book", wxPoint(30, 30), wxSize(700, 350)) {
@@ -31,13 +31,51 @@ Main::~Main() {
 
 }
 
-void Main::onButtonClick(wxCommandEvent &evt) {
+void Main::onBuyClick(wxCommandEvent &evt) {
+    std::shared_ptr<Order> order;
+    double share_price;
+    unsigned int qty;
     
     std::string order_price = (price->GetValue()).ToStdString();
     std::string order_quantity = (quantity->GetValue()).ToStdString();
+    
+    sscanf(order_price.c_str(), "%lf", &share_price);
+    sscanf(order_quantity.c_str(), "%d", &qty);
 
-    std::string order = order_price + " " + order_quantity;
-
-    bidbox->Append(wxString(order));
+    // add order 
+    if (order_price != "" && order_quantity != "") {
+        order = std::make_shared<Order>(Buy, qty, share_price);
+        orderbook.addOrder(order);
+    }
+    
+    clearOrderBook();
     evt.Skip();
+}
+
+void Main::onAskClick(wxCommandEvent &evt) {
+    std::shared_ptr<Order> order;
+    double share_price;
+    unsigned int qty;
+    
+    std::string order_price = (price->GetValue()).ToStdString();
+    std::string order_quantity = (quantity->GetValue()).ToStdString();
+    
+    sscanf(order_price.c_str(), "%lf", &share_price);
+    sscanf(order_quantity.c_str(), "%d", &qty);
+
+    // add order 
+    if (order_price != "" && order_quantity != "") {
+        order = std::make_shared<Order>(Sell, qty, share_price);
+        orderbook.addOrder(order);
+    }
+    
+    clearOrderBook();
+    evt.Skip();
+}
+
+void Main::clearOrderBook() {
+    askbox->Clear();  
+    bidbox->Clear();
+    orderbook.wxOrderDisplay(Buy, bidbox);
+    orderbook.wxOrderDisplay(Sell, askbox);
 }

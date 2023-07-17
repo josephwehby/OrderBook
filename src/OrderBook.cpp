@@ -78,6 +78,32 @@ void OrderBook::printOrderBook() {
 
 }
 
+// order book generator
+void OrderBook::wxOrderDisplay(OrderType order_type, wxListBox* box) {
+    std::string temp;
+
+    switch (order_type) {
+        case Buy:
+            for (auto it = bid_levels.begin(); it != bid_levels.end(); it++) {
+                std::string price = std::to_string(it->first);
+                std::string quant = std::to_string(it->second->getLevelQuantity());
+                temp = price + " " + quant;
+                box->Append(wxString(temp));
+            }
+            break;
+        case Sell:
+            for (auto it = ask_levels.rbegin(); it != ask_levels.rend(); it++) {
+                std::string price = std::to_string(it->first);
+                std::string quant = std::to_string(it->second->getLevelQuantity());
+                temp = price + " " + quant;
+                box->Append(wxString(temp));
+            }
+            break;
+        default:
+            break; 
+    }
+}
+
 // create a new level and return the price added at
 double OrderBook::createNewLevel(std::shared_ptr<Order> order) {
     std::shared_ptr<Level> level;
