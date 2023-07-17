@@ -6,17 +6,20 @@ class Main : public wxFrame{
 public:
     Main();
 	~Main();
-    void onBuyClick(wxCommandEvent &evt);
-    void onAskClick(wxCommandEvent &evt);
+    void onButtonClick(OrderType);
     wxDECLARE_EVENT_TABLE();
 
 
 private:
     void clearOrderBook();
+    void onBuyClick(wxCommandEvent &evt);
+    void onAskClick(wxCommandEvent &evt);
     OrderBook orderbook;    
     wxStaticText* price_text = nullptr;
     wxStaticText* quantity_text = nullptr;
-	
+    wxStaticText* bid = nullptr;
+	wxStaticText* ask = nullptr;
+
     wxButton* buy = nullptr;
     wxButton* sell = nullptr;
     

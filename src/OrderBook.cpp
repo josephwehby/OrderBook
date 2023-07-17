@@ -87,7 +87,7 @@ std::string OrderBook::wxCreateLevelString(double price, unsigned int qty) {
 }
 
 
-// order book generator
+// display levels of orderbook to gui
 void OrderBook::wxOrderDisplay(OrderType order_type, wxListBox* box) {
     std::string temp;
 
