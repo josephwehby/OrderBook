@@ -78,25 +78,28 @@ void OrderBook::printOrderBook() {
 
 }
 
+std::string OrderBook::wxCreateLevelString(double price, unsigned int qty) {
+    std::string p = std::to_string(price);
+    std::string q = std::to_string(qty);
+    std::string temp = p + " " + q;
+
+    return temp;
+}
+
+
 // order book generator
 void OrderBook::wxOrderDisplay(OrderType order_type, wxListBox* box) {
     std::string temp;
 
     switch (order_type) {
         case Buy:
-            for (auto it = bid_levels.begin(); it != bid_levels.end(); it++) {
-                std::string price = std::to_string(it->first);
-                std::string quant = std::to_string(it->second->getLevelQuantity());
-                temp = price + " " + quant;
-                box->Append(wxString(temp));
+            for (auto it = bid_levels.rbegin(); it != bid_levels.rend(); it++) {
+                box->Append(wxString(wxCreateLevelString(it->first, it->second->getLevelQuantity())));
             }
             break;
         case Sell:
-            for (auto it = ask_levels.rbegin(); it != ask_levels.rend(); it++) {
-                std::string price = std::to_string(it->first);
-                std::string quant = std::to_string(it->second->getLevelQuantity());
-                temp = price + " " + quant;
-                box->Append(wxString(temp));
+            for (auto it = ask_levels.begin(); it != ask_levels.end(); it++) {
+                box->Append(wxString(wxCreateLevelString(it->first, it->second->getLevelQuantity())));
             }
             break;
         default:

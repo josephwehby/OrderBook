@@ -18,6 +18,7 @@ class OrderBook {
         double bestAsk();
         double getSpread();
         void printOrderBook();
+        std::string wxCreateLevelString(double, unsigned int);
         void wxOrderDisplay(OrderType, wxListBox*); 
       
     private:
