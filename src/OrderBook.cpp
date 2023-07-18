@@ -46,6 +46,11 @@ double OrderBook::getSpread() {
     return spread;
 }
 
+double OrderBook::getMidPrice() {
+    double mid = bestBid() + (getSpread() / 2);
+    return mid;
+}
+
 void OrderBook::printOrderBook() {
     bool bid, ask;
     bid = true;

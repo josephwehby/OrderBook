@@ -17,6 +17,7 @@ class OrderBook {
         double bestBid();
         double bestAsk();
         double getSpread();
+        double getMidPrice();
         void printOrderBook();
         std::string wxCreateLevelString(double, unsigned int);
         void wxOrderDisplay(OrderType, wxListBox*); 

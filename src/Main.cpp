@@ -5,7 +5,7 @@ wxBEGIN_EVENT_TABLE(Main, wxFrame)
     EVT_BUTTON(10003, Main::onAskClick)
 wxEND_EVENT_TABLE()
 
-Main::Main() : wxFrame(nullptr, wxID_ANY, "Limit Order Book", wxPoint(30, 30), wxSize(700, 350)) {
+Main::Main() : wxFrame(nullptr, wxID_ANY, "Limit Order Book", wxPoint(30, 30), wxSize(700, 455)) {
 	
     wxFont font(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false);
 
@@ -23,14 +23,17 @@ Main::Main() : wxFrame(nullptr, wxID_ANY, "Limit Order Book", wxPoint(30, 30), w
     sell->SetBackgroundColour(wxColour(*wxRED));
     sell->SetFont(font);
 
-    bid = new wxStaticText(this, wxID_ANY, "Bid", wxPoint(360, 10), wxSize(50,30));
+    mid_price = new wxStaticText(this, wxID_ANY, "0.00", wxPoint(430, 10), wxSize(50,30));
+    spread = new wxStaticText(this, wxID_ANY, "0.00", wxPoint(430, 40), wxSize(50,30));
+
+    bid = new wxStaticText(this, wxID_ANY, "Bid", wxPoint(360, 80), wxSize(50,30));
     bid->SetFont(font);
-    bidbox = new wxListBox(this, 10004, wxPoint(300, 30), wxSize(150, 200));
+    bidbox = new wxListBox(this, 10004, wxPoint(300, 100), wxSize(150, 200));
     bidbox->SetForegroundColour(wxColour(*wxGREEN));
     
-    ask = new wxStaticText(this, wxID_ANY, "Ask", wxPoint(510, 10), wxSize(50,30));
+    ask = new wxStaticText(this, wxID_ANY, "Ask", wxPoint(510, 80), wxSize(50,30));
     ask->SetFont(font);
-    askbox = new wxListBox(this, 10005, wxPoint(450, 30), wxSize(150, 200));
+    askbox = new wxListBox(this, 10005, wxPoint(450, 100), wxSize(150, 200));
     askbox->SetForegroundColour(wxColour(*wxRED));
 }
 
@@ -48,11 +51,16 @@ void Main::onAskClick(wxCommandEvent &evt) {
     evt.Skip();
 }
 
-void Main::clearOrderBook() {
+void Main::resetOrderBook() {
     askbox->Clear();  
     bidbox->Clear();
     orderbook.wxOrderDisplay(Buy, bidbox);
     orderbook.wxOrderDisplay(Sell, askbox);
+
+    std::string str_spread = std::to_string(orderbook.getSpread());
+    std::string str_mid = std::to_string(orderbook.getMidPrice());
+    spread->SetLabel(wxString(str_spread));
+    mid_price->SetLabel(wxString(str_mid));
 }
 
 void Main::onButtonClick(OrderType order_type) {
@@ -72,5 +80,5 @@ void Main::onButtonClick(OrderType order_type) {
         orderbook.addOrder(order);
     }
     
-    clearOrderBook();
+    resetOrderBook();
 }
