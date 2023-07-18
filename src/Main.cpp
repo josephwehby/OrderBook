@@ -8,7 +8,7 @@ wxEND_EVENT_TABLE()
 Main::Main() : wxFrame(nullptr, wxID_ANY, "Limit Order Book", wxPoint(30, 30), wxSize(700, 455)) {
 	
     wxFont font(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false);
-
+    
     price_text = new wxStaticText(this, wxID_ANY, "Price", wxPoint(10, 10), wxSize(50,30));
     price = new wxTextCtrl(this, 10000, "", wxPoint(80, 10), wxSize(130, 30));
 
@@ -25,7 +25,8 @@ Main::Main() : wxFrame(nullptr, wxID_ANY, "Limit Order Book", wxPoint(30, 30), w
 
     mid_price = new wxStaticText(this, wxID_ANY, "0.00", wxPoint(430, 10), wxSize(50,30));
     spread = new wxStaticText(this, wxID_ANY, "0.00", wxPoint(430, 40), wxSize(50,30));
-
+    mid_price->SetFont(font);
+    spread->SetFont(font);
     bid = new wxStaticText(this, wxID_ANY, "Bid", wxPoint(360, 80), wxSize(50,30));
     bid->SetFont(font);
     bidbox = new wxListBox(this, 10004, wxPoint(300, 100), wxSize(150, 200));
@@ -52,13 +53,20 @@ void Main::onAskClick(wxCommandEvent &evt) {
 }
 
 void Main::resetOrderBook() {
+    std::stringstream ss;
+    std::string str_spread, str_mid;
     askbox->Clear();  
     bidbox->Clear();
     orderbook.wxOrderDisplay(Buy, bidbox);
     orderbook.wxOrderDisplay(Sell, askbox);
+    
+    ss.precision(3);
+    ss << std::fixed << orderbook.getSpread();
+    ss >> str_spread;
+    ss.clear();
+    ss << std::fixed << orderbook.getMidPrice();
+    ss >> str_mid;
 
-    std::string str_spread = std::to_string(orderbook.getSpread());
-    std::string str_mid = std::to_string(orderbook.getMidPrice());
     spread->SetLabel(wxString(str_spread));
     mid_price->SetLabel(wxString(str_mid));
 }

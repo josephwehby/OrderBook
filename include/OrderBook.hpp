@@ -8,6 +8,7 @@
 #include <iostream>
 #include <deque>
 #include <string>
+#include <sstream>
 #include "wx/wx.h"
 
 class OrderBook {

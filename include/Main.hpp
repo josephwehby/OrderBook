@@ -1,6 +1,7 @@
 #include "wx/wx.h"
 #include "OrderBook.hpp"
 #include <memory>
+#include <sstream>
 
 class Main : public wxFrame{
 public:
