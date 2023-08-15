@@ -69,7 +69,6 @@ class Logger {
     
     private:
         static LogPriority priority;
-    
 };
 
 LogPriority Logger::priority = INFO;

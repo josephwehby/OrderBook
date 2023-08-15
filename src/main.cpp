@@ -3,8 +3,6 @@
 #include "Order.hpp"
 #include <memory>
 #include <string>
-#include "logger.hpp"
-
 
 using namespace std;
 
@@ -14,11 +12,6 @@ int main(int argc, char *argv[]) {
     std::string buy_sell;
     double price;
     unsigned int quantity;
-
-    int a = 5;
-    const char* c = "joseph";
-    
-    Logger::Info("log test %d %s", a, c);
 
     while (true) {
         printf("Buy/Sell: ");

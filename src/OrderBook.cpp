@@ -7,7 +7,7 @@ OrderBook::OrderBook() {
 bool OrderBook::addOrder(std::shared_ptr<Order> order) {
     bool add_order = true;
 
-    std::cout << "ORDER SUMBITTED" << std::endl;
+    //Logger::Info("ORDER SUMBITTED");
     switch(order->order_type) {
         case Buy:
             addBid(order);
@@ -217,13 +217,19 @@ void OrderBook::removeLevels(OrderType order_type) {
         case Buy:
             copy = ask_levels;
             for (auto it = copy.begin(); it != copy.end(); it++) {
-                if (it->second->getLevelQuantity() == 0) ask_levels.erase(it->first);
+                if (it->second->getLevelQuantity() == 0) {
+                    //Logger::Info("REMOVED %.2f ASK LEVEL", it->first);
+                    ask_levels.erase(it->first);
+                }
             }
             break;
         case Sell:
             copy = bid_levels;
             for (auto it = copy.begin(); it != copy.end(); it++) {
-                if (it->second->getLevelQuantity() == 0) bid_levels.erase(it->first);
+                if (it->second->getLevelQuantity() == 0) {
+                    //Logger::Info("REMOVED %.2f BID LEVEL", it->first);
+                    bid_levels.erase(it->first);
+                }
             }
             break;
         default:
