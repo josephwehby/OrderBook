@@ -68,9 +68,7 @@ class Logger {
         }
     
     private:
-        static LogPriority priority;
+        inline static LogPriority priority = INFO;
 };
-
-LogPriority Logger::priority = INFO;
 
 #endif

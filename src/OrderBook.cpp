@@ -7,7 +7,7 @@ OrderBook::OrderBook() {
 bool OrderBook::addOrder(std::shared_ptr<Order> order) {
     bool add_order = true;
 
-    //Logger::Info("ORDER SUMBITTED");
+    Logger::Info("ORDER SUMBITTED");
     switch(order->order_type) {
         case Buy:
             addBid(order);
@@ -113,6 +113,7 @@ double OrderBook::addBid(std::shared_ptr<Order> order) {
                 break;
             }
             else if (level_shares == order->quantity) {
+                Logger::Info("%d SHARES BOUGHT @ %.2f", order->quantity, current_order->price);
                 ask_levels.erase(ask_it);
                 return ask_it->first;
             } else {
@@ -126,9 +127,11 @@ double OrderBook::addBid(std::shared_ptr<Order> order) {
                     
                     if (order_shares >= order->quantity) {
                         current_order->quantity = order_shares - order->quantity;
+                        Logger::Info("%d SHARES BOUGHT @ %.2f", order->quantity, current_order->price);
                         return current_order->price;
                     } else {
                         order->quantity -= order_shares;
+                        Logger::Info("%d SHARES BOUGHT @ %.2f", order_shares, current_order->price);
                         level->level_orders.pop_front();
                     }
                 } 
@@ -171,6 +174,7 @@ double OrderBook::addAsk(std::shared_ptr<Order> order) {
                 break;
             }
             else if (level_shares == order->quantity) {
+                Logger::Info("%d SHARES SOLD @ %.2f", order->quantity, current_order->price);
                 bid_levels.erase(bid_it->first);
                 return ask_it->first;
             } else {
@@ -181,12 +185,14 @@ double OrderBook::addAsk(std::shared_ptr<Order> order) {
                 for (i = 0; i < level_copy.size(); i++) {
                     current_order = level_copy[i];
                     order_shares = current_order->quantity;
-                    
+
                     if (order_shares >= order->quantity) {
                         current_order->quantity = order_shares - order->quantity;
+                        Logger::Info("%d SHARES SOLD @ %.2f", order->quantity, current_order->price);
                         return current_order->price;
                     } else {
                         order->quantity -= order_shares;
+                        Logger::Info("%d SHARES SOLD @ %.2f", order_shares, current_order->price);
                         level->level_orders.pop_front();
                     }
                 } 
@@ -218,7 +224,7 @@ void OrderBook::removeLevels(OrderType order_type) {
             copy = ask_levels;
             for (auto it = copy.begin(); it != copy.end(); it++) {
                 if (it->second->getLevelQuantity() == 0) {
-                    //Logger::Info("REMOVED %.2f ASK LEVEL", it->first);
+                    Logger::Debug("REMOVED %.2f ASK LEVEL", it->first);
                     ask_levels.erase(it->first);
                 }
             }
@@ -227,7 +233,7 @@ void OrderBook::removeLevels(OrderType order_type) {
             copy = bid_levels;
             for (auto it = copy.begin(); it != copy.end(); it++) {
                 if (it->second->getLevelQuantity() == 0) {
-                    //Logger::Info("REMOVED %.2f BID LEVEL", it->first);
+                    Logger::Debug("REMOVED %.2f BID LEVEL", it->first);
                     bid_levels.erase(it->first);
                 }
             }
