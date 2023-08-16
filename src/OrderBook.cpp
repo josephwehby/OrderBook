@@ -85,8 +85,11 @@ double OrderBook::createNewLevel(std::shared_ptr<Order> order) {
 
     if (order->order_type == Buy) {
         bid_levels[order->price] = level;
+        Logger::Info("NEW BID LEVEL CREATED @ %.2f", order->price);
     } else {
         ask_levels[order->price] = level;
+        Logger::Info("NEW ASK LEVEL CREATED @ %.2f", order->price);
+
     }
 
     return order->price;
@@ -113,8 +116,8 @@ double OrderBook::addBid(std::shared_ptr<Order> order) {
                 break;
             }
             else if (level_shares == order->quantity) {
-                Logger::Info("%d SHARES BOUGHT @ %.2f", order->quantity, current_order->price);
                 ask_levels.erase(ask_it);
+                Logger::Info("%d SHARES BOUGHT @ %.2f", order->quantity, ask_it->first);
                 return ask_it->first;
             } else {
                 
@@ -174,7 +177,7 @@ double OrderBook::addAsk(std::shared_ptr<Order> order) {
                 break;
             }
             else if (level_shares == order->quantity) {
-                Logger::Info("%d SHARES SOLD @ %.2f", order->quantity, current_order->price);
+                Logger::Info("%d SHARES SOLD @ %.2f", order->quantity, bid_it->first);
                 bid_levels.erase(bid_it->first);
                 return ask_it->first;
             } else {
