@@ -1,5 +1,6 @@
 #include <iostream>
 #include "OrderBook.hpp"
+#include "Logger.hpp"
 #include "Order.hpp"
 #include <memory>
 #include <string>
@@ -33,8 +34,11 @@ int main(int argc, char *argv[]) {
         std::cin.ignore(10000, '\n');
         if (buy_sell == "buy") {
             order = std::make_shared<Order>(Buy, quantity, price);
-        } else {
+        } else if (buy_sell == "ask") {
             order = std::make_shared<Order>(Sell, quantity, price);
+        } else {
+            Logger::Debug("INVALID ORDER TYPE");
+            continue;
         }
 
         orderbook.addOrder(order);

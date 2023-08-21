@@ -18,6 +18,7 @@ bool OrderBook::addOrder(std::shared_ptr<Order> order) {
             removeLevels(Sell);
             break;
         default:
+            Logger::Debug("INVALID ORDER TYPE");
 			add_order = false;
 			break;
     }

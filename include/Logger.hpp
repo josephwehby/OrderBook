@@ -68,7 +68,7 @@ class Logger {
         }
     
     private:
-        inline static LogPriority priority = INFO;
+        inline static LogPriority priority = DEBUG;
 };
 
 #endif
