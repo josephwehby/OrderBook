@@ -7,7 +7,7 @@ OrderBook::OrderBook() {
 bool OrderBook::addOrder(std::shared_ptr<Order> order) {
     bool add_order = true;
 
-    Logger::Info("ORDER SUMBITTED");
+    Logger::Info("NEW ORDER SUMBITTED");
     switch(order->order_type) {
         case Buy:
             addBid(order);
