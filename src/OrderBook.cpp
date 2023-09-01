@@ -1,7 +1,7 @@
 #include "OrderBook.hpp"
 
 OrderBook::OrderBook() {
-    printf("[!] Orderbook created\n");
+    Logger::Info("ORDERBOOK CREATED");
 }
 
 bool OrderBook::addOrder(std::shared_ptr<Order> order) {

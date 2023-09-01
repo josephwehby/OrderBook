@@ -24,7 +24,8 @@ void Server::Run() {
 
     bind(listening, (sockaddr*)&hint, sizeof(hint));
     listen(listening, SOMAXCONN);
-    
+    Logger::Info("STOCK SERVER STARTED");
+
     // accept clients
     id = 1;
     while (true) {
@@ -33,7 +34,7 @@ void Server::Run() {
             Logger::Error("PROBLEM WITH CLIENT CONNECTING");
             continue;
         }
-
+        Logger::Info("NEW CLIENT CONNECTED");
         user = std::make_shared<User>(client_socket, id);
         HandleClient(user);
         id++;
@@ -83,7 +84,7 @@ void Server::HandleClient(std::shared_ptr<User> user) {
         orderbook.addOrder(order);
         orderbook.printOrderBook();
     }
- 
+    
     // Close the socket
     close(user->socket);
 }

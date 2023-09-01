@@ -18,7 +18,6 @@ class Server {
     private:
         void HandleClient(std::shared_ptr<User>); 
         OrderBook orderbook;
-        int port = 31415;
+        const int port = 31415;
         sockaddr_in hint;
-        std::vector <int> clients;
 };
