@@ -1,6 +1,6 @@
 #include "User.hpp"
 
-User::User(std::string name, unsigned long id) {
-    this->name = name;
+User::User(int socket, unsigned long id) {
+    this->socket = socket;
     this->id = id;
 }

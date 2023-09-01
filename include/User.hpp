@@ -5,9 +5,10 @@
 
 class User {
     public:
-        User(std::string, unsigned long);
+        User(int, unsigned long);
     private:
-        std::string name;
+        friend class Server;
+        int socket;
         unsigned long id;
 };
 

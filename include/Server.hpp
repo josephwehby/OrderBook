@@ -1,4 +1,5 @@
 #include <vector>
+#include <thread>
 #include <sys/types.h>
 #include <unistd.h>
 #include <sys/socket.h>
@@ -8,13 +9,14 @@
 #include <string>
 #include "Logger.hpp"
 #include "OrderBook.hpp"
+#include "User.hpp"
 
 class Server {
     public:
         Server();
         void Run();
-        void HandleClient(int);
     private:
+        void HandleClient(std::shared_ptr<User>); 
         OrderBook orderbook;
         int port = 31415;
         sockaddr_in hint;

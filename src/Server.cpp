@@ -6,6 +6,8 @@ Server::Server() {
 
 void Server::Run() {
     int listening;
+    unsigned long id;
+    std::shared_ptr<User> user;
     sockaddr_in client;
     socklen_t client_size = sizeof(client);
 
@@ -22,30 +24,37 @@ void Server::Run() {
 
     bind(listening, (sockaddr*)&hint, sizeof(hint));
     listen(listening, SOMAXCONN);
+    
+    // accept clients
+    id = 1;
+    while (true) {
+        int client_socket = accept(listening, (sockaddr*)&client, &client_size);
+        if (client_socket == -1) {
+            Logger::Error("PROBLEM WITH CLIENT CONNECTING");
+            continue;
+        }
 
-    int client_socket = accept(listening, (sockaddr*)&client, &client_size);
-    if (client_socket == -1) {
-        Logger::Error("PROBLEM WITH CLIENT CONNECTING");
-        return;
+        user = std::make_shared<User>(client_socket, id);
+        HandleClient(user);
+        id++;
     }
-
+    
     close(listening);
-    HandleClient(client_socket);
 }
 
-void Server::HandleClient(int client_socket) {
+void Server::HandleClient(std::shared_ptr<User> user) {
     char buf[4096];
     std::shared_ptr<Order> order;
     double price;
     unsigned int quantity;
 
-    send(client_socket, "LIMIT ORDERBOOK\n", 17, 0);
+    send(user->socket, "LIMIT ORDERBOOK\n", 17, 0);
     while (true)
     {
         memset(buf, 0, 4096);
  
         // Wait for client to send data
-        int bytesReceived = recv(client_socket, buf, 4096, 0);
+        int bytesReceived = recv(user->socket, buf, 4096, 0);
         if (bytesReceived == -1) {
             Logger::Error("ERROR RECEIVING DATA");
             break;
@@ -55,7 +64,6 @@ void Server::HandleClient(int client_socket) {
             Logger::Info("CLIENT DISCONNECTED");
             break;
         }
-
 
         char order_type[7];
         std::string s(buf, 0, bytesReceived);
@@ -77,5 +85,5 @@ void Server::HandleClient(int client_socket) {
     }
  
     // Close the socket
-    close(client_socket);
+    close(user->socket);
 }
