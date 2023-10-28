@@ -15,7 +15,7 @@ include_directories(
 )
 
 if (UNIX)
-  string(APPEND CMAKE_CXX_FLAGS " -Wall -Werror -Wno-format-security -Wno-self-assign-overloaded")
+  string(APPEND CMAKE_CXX_FLAGS "-Wall -Werror -Wno-format-security -Wno-self-assign-overloaded")
 endif()
 
 add_executable(main 

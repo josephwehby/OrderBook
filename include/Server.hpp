@@ -7,6 +7,7 @@
 #include <arpa/inet.h>
 #include <string.h>
 #include <string>
+#include <mutex>
 #include "Logger.hpp"
 #include "OrderBook.hpp"
 #include "User.hpp"
@@ -16,6 +17,7 @@ class Server {
         Server();
         void Run();
     private:
+        std::mutex thread_lock; 
         void HandleClient(std::shared_ptr<User>); 
         OrderBook orderbook;
         const int port = 31415;

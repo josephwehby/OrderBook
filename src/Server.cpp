@@ -8,6 +8,7 @@ void Server::Run() {
     int listening;
     unsigned long id;
     std::shared_ptr<User> user;
+    std::vector <std::thread> threads;
     sockaddr_in client;
     socklen_t client_size = sizeof(client);
 
@@ -36,7 +37,7 @@ void Server::Run() {
         }
         Logger::Info("NEW CLIENT CONNECTED");
         user = std::make_shared<User>(client_socket, id);
-        HandleClient(user);
+        threads.push_back(std::thread(&Server::HandleClient, this, user));
         id++;
     }
     
@@ -80,9 +81,10 @@ void Server::HandleClient(std::shared_ptr<User> user) {
             Logger::Debug("INVALID ORDER TYPE");
             continue;
         }
-
+        thread_lock.lock();
         orderbook.addOrder(order);
         orderbook.printOrderBook();
+        thread_lock.unlock();
     }
     
     // Close the socket
