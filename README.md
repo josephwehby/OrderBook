@@ -6,7 +6,7 @@
 1. run `cmake CMakeFiles.txt`
 1. run `cmake --build .`
 ## Usage
-1. To use this program simply run `bin/main`
-1. Next it will ask whether you want to buy or sell.
-1. Then it will ask for the order quantity.
-1. FInally it will ask for the order price and print the order book.
+1. Start the server by running `bin/main`
+1. To connect to the server run `netcat localhost 31415`
+1. Submit a buy or sell order in the format `buy share_count price` or `sell share_count price`
+1. To stop trading simply use `CTRL+C`
